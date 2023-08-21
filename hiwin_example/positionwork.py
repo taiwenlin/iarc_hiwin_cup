@@ -40,12 +40,12 @@ cup_lid_work_pose = [262.097, 379.033, 232.367, 179.373, 0.663, 89.547]
 # cup_push_pose6 = [267.635, 390.659, 232.367, 179.373, 0.663, 89.547]
 cup_push_pose1 = [263.509, 431.921, 48.21, 179.378, 0.033, 89.551]
 cup_push_pose2 = [263.509, 431.921, 48.21, 179.336, 5.335, 89.549]
-cup_push_pose3 = [263.509, 431.921, 38.192, 179.336, 5.335, 89.549]
-cup_push_pose4 = [263.509, 423.921, 38.192, 179.368, 5.335, 89.551]
-cup_push_pose5 = [263.509, 423.921, 38.192, 179.378, 0.036, 89.551]
-cup_push_pose6 = [263.509, 423.921, 34.398, 179.378, 0.036, 89.551]
-cup_push_pose7 = [263.509, 423.921, 39.998, 179.378, 0.035, 89.551]
-cup_push_pose8 = [263.509, 423.921, 33.234, 179.378, 0.035, 89.551]
+cup_push_pose3 = [263.509, 431.921, 39.192, 179.336, 5.335, 89.549]
+cup_push_pose4 = [263.509, 422.921, 39.192, 179.368, 5.335, 89.551]
+cup_push_pose5 = [263.509, 422.921, 39.192, 179.378, -0.5, 89.551]
+cup_push_pose6 = [263.509, 422.921, 35.398, 179.378, -0.5, 89.551]
+cup_push_pose7 = [263.509, 422.921, 40.998, 179.378, -0.5, 89.551]
+cup_push_pose8 = [263.509, 422.921, 34.234, 179.378, -0.5, 89.551]
 
 sause_pose = [417.963, 177.340, 181.324, 179.372, 0.664, 89.557]
 sause_work_pose = [262.097, 379.033, 148.511, 179.378, 0.035, 89.551]
@@ -243,7 +243,7 @@ class ExampleStrategy(Node):
         global times
         if state == States.INIT:
             self.get_logger().info('INIT')
-            times=3
+            times=1
             # res=self.vacuum_control(VACUUM_PIN1,'ON')
             # res=self.vacuum_control(VACUUM_PIN1,'OFF')
             # res=self.vacuum_control(VACUUM_PIN2,'ON')
@@ -287,6 +287,9 @@ class ExampleStrategy(Node):
             cup_work_pose[2]+=80
             res=self.move('P',cup_work_pose,holding=False)
             cup_work_pose[2]-=80
+            cup_work_pose[2]+=30
+            res=self.move('P',cup_work_pose,holding=False)
+            cup_work_pose[2]-=30
             while True:
                 again = input("check Again?:")
                 if again == 'y' or again == 'Y':
@@ -299,6 +302,18 @@ class ExampleStrategy(Node):
             cup_work_pose[2]-=0
             res=self.move('P',cup_work_pose,holding=False)
             cup_work_pose[2]+=0
+            while True:
+                again = input("check Again?:")
+                if again == 'y' or again == 'Y':
+                    print("Contiune")
+                    break
+                else:
+                    times=1
+                    nest_state=States.gohome
+                    return nest_state
+            cup_work_pose[2]-=45
+            res=self.move('P',cup_work_pose,holding=False)
+            cup_work_pose[2]+=45
             while True:
                 again = input("check Again?:")
                 if again == 'y' or again == 'Y':
@@ -383,12 +398,12 @@ class ExampleStrategy(Node):
             # res=self.robot_wait()
             res=self.jaw('close')
             res=self.robot_wait()
-            res=self.move('L',cup_push_pose7,holding=True,tool=8)
-            res=self.jaw('open')
-            res=self.robot_wait()
-            res=self.move('L',cup_push_pose8,holding=False,tool=8)
-            res=self.jaw('close')
-            res=self.robot_wait()
+            # res=self.move('L',cup_push_pose7,holding=True,tool=8)
+            # res=self.jaw('open')
+            # res=self.robot_wait()
+            # res=self.move('L',cup_push_pose8,holding=False,tool=8)
+            # res=self.jaw('close')
+            # res=self.robot_wait()
             cup_lid_work_pose[2]+=50
             res=self.move('L',cup_lid_work_pose,holding=False)
             cup_lid_work_pose[2]-=50

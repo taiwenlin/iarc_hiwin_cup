@@ -40,12 +40,12 @@ cup_lid_work_pose = [262.097, 379.033, 232.367, 179.373, 0.663, 89.547]
 # cup_push_pose6 = [267.635, 390.659, 232.367, 179.373, 0.663, 89.547]
 cup_push_pose1 = [263.509, 431.921, 48.21, 179.378, 0.033, 89.551]
 cup_push_pose2 = [263.509, 431.921, 48.21, 179.336, 5.335, 89.549]
-cup_push_pose3 = [263.509, 431.921, 38.192, 179.336, 5.335, 89.549]
-cup_push_pose4 = [263.509, 423.921, 38.192, 179.368, 5.335, 89.551]
-cup_push_pose5 = [263.509, 423.921, 38.192, 179.378, 0.036, 89.551]
-cup_push_pose6 = [263.509, 423.921, 34.398, 179.378, 0.036, 89.551]
-cup_push_pose7 = [263.509, 423.921, 39.998, 179.378, 0.035, 89.551]
-cup_push_pose8 = [263.509, 423.921, 33.234, 179.378, 0.035, 89.551]
+cup_push_pose3 = [263.509, 431.921, 39.192, 179.336, 5.335, 89.549]
+cup_push_pose4 = [263.509, 422.921, 39.192, 179.368, 5.335, 89.551]
+cup_push_pose5 = [263.509, 422.921, 39.192, 179.378, -0.5, 89.551]
+cup_push_pose6 = [263.509, 422.921, 35.398, 179.378, -0.5, 89.551]
+cup_push_pose7 = [263.509, 422.921, 40.998, 179.378, -0.5, 89.551]
+cup_push_pose8 = [263.509, 422.921, 34.234, 179.378, -0.5, 89.551]
 
 sause_pose = [417.963, 177.340, 181.324, 179.372, 0.664, 89.557]
 sause_work_pose = [262.097, 379.033, 148.511, 179.378, 0.035, 89.551]
@@ -290,7 +290,7 @@ class ExampleStrategy(Node):
                     nest_state = States.gohome
                     return nest_state
                 elif again == 'F' or again=='f':
-                    res=self.vacuum_control(PUMP,'ON',holding=False,do_timer=24)
+                    res=self.vacuum_control(PUMP,'ON',holding=False,do_timer=22)
                     continue
                 else:
                     continue
@@ -301,7 +301,7 @@ class ExampleStrategy(Node):
             res=self.move('L',water_pose3,holding=True)
             water_pose3[2]-=155
             water_pose3[0]-=80
-            time.sleep(0.38)
+            time.sleep(0.352)
             res=self.move('L',water_pose3,holding=False)
             res=self.move('P',water_pose2,holding=False)
             res=self.move('P',water_pose1,holding=False)
@@ -332,7 +332,7 @@ class ExampleStrategy(Node):
             # res=self.robot_wait()
             water_pose3[0]-=80
             water_pose3[2]-=155
-            time.sleep(0.25)
+            # time.sleep(0.15)
             res=self.move('L',water_pose3)
             # res=self.robot_wait()
             res=self.move('P',water_pose2,holding=False)

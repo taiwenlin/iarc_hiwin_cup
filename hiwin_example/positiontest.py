@@ -40,12 +40,12 @@ cup_lid_work_pose = [262.097, 379.033, 232.367, 179.373, 0.663, 89.547]
 # cup_push_pose6 = [267.635, 390.659, 232.367, 179.373, 0.663, 89.547]
 cup_push_pose1 = [263.509, 431.921, 48.21, 179.378, 0.033, 89.551]
 cup_push_pose2 = [263.509, 431.921, 48.21, 179.336, 5.335, 89.549]
-cup_push_pose3 = [263.509, 431.921, 38.192, 179.336, 5.335, 89.549]
-cup_push_pose4 = [263.509, 423.921, 38.192, 179.368, 5.335, 89.551]
-cup_push_pose5 = [263.509, 423.921, 38.192, 179.378, 0.036, 89.551]
-cup_push_pose6 = [263.509, 423.921, 34.398, 179.378, 0.036, 89.551]
-cup_push_pose7 = [263.509, 423.921, 39.998, 179.378, 0.035, 89.551]
-cup_push_pose8 = [263.509, 423.921, 33.234, 179.378, 0.035, 89.551]
+cup_push_pose3 = [263.509, 431.921, 39.192, 179.336, 5.335, 89.549]
+cup_push_pose4 = [263.509, 422.921, 39.192, 179.368, 5.335, 89.551]
+cup_push_pose5 = [263.509, 422.921, 39.192, 179.378, -0.5, 89.551]
+cup_push_pose6 = [263.509, 422.921, 35.398, 179.378, -0.5, 89.551]
+cup_push_pose7 = [263.509, 422.921, 40.998, 179.378, -0.5, 89.551]
+cup_push_pose8 = [263.509, 422.921, 34.234, 179.378, -0.5, 89.551]
 
 sause_pose = [417.963, 177.340, 181.324, 179.372, 0.664, 89.557]
 sause_work_pose = [262.097, 379.033, 148.511, 179.378, 0.035, 89.551]
@@ -243,7 +243,7 @@ class ExampleStrategy(Node):
         global times
         if state == States.INIT:
             self.get_logger().info('INIT')
-            times=1
+            times=4
             # res=self.vacuum_control(VACUUM_PIN1,'ON')
             # res=self.vacuum_control(VACUUM_PIN1,'OFF')
             # res=self.vacuum_control(VACUUM_PIN2,'ON')
@@ -261,13 +261,13 @@ class ExampleStrategy(Node):
                 else:
                     nest_state=States.gohome
                     return nest_state
-            if times==1:
+            if times==3:
                 nest_state = States.cupcatch
-            elif times==2:
-                nest_state=States.cuplidcatch
-            elif times==3:
-                nest_state=States.sausecatch
             elif times==4:
+                nest_state=States.cuplidcatch
+            elif times==2:
+                nest_state=States.sausecatch
+            elif times==1:
                 nest_state=States.sauselidcatch
             else:
                 nest_state=States.gohome
@@ -277,17 +277,17 @@ class ExampleStrategy(Node):
             cup_pose[2]+=30
             res=self.move('P',cup_pose,holding=False)
             cup_pose[2]-=30
-            cup_pose[2]+=23
+            cup_pose[2]+=27
             res=self.move('P',cup_pose,holding=False)
-            cup_pose[2]-=23
+            cup_pose[2]-=27
             while True:
                 again = input("check Again?:")
                 if again == 'y' or again == 'Y':
                     print("Contiune")
-                    times=2
+                    times=4
                     break
                 else:
-                    times=1
+                    times=3
                     nest_state=States.gohome
                     return nest_state
                 
@@ -304,7 +304,7 @@ class ExampleStrategy(Node):
             res=self.robot_wait()
             res=self.jaw('open')
             res=self.robot_wait()
-            nest_state = States.cuplidcatch
+            nest_state = States.gohome
         elif state==States.cuplidcatch:
             self.get_logger().info('cuplidcatch')
             res=self.jaw('open')
@@ -317,17 +317,17 @@ class ExampleStrategy(Node):
             cup_lid_pose[2]+=60
             res=self.move('P',cup_lid_pose,holding=False)
             cup_lid_pose[2]-=60
-            cup_lid_pose[2]+=33
+            cup_lid_pose[2]+=37
             res=self.move('P',cup_lid_pose,holding=False)
-            cup_lid_pose[2]-=33
+            cup_lid_pose[2]-=37
             while True:
                 again = input("check Again?:")
                 if again == 'y' or again == 'Y':
                     print("Contiune")
-                    times=3
+                    times=1
                     break
                 else:
-                    times=2
+                    times=4
                     nest_state=States.gohome
                     return nest_state
             cup_lid_pose[2]+=10
@@ -346,7 +346,7 @@ class ExampleStrategy(Node):
             res=self.robot_wait()
             res=self.jaw('open')
             res=self.robot_wait()
-            nest_state=States.sausecatch
+            nest_state=States.gohome
         elif state == States.sausecatch:
             self.get_logger().info('sausecatch')
             res=self.jaw('open')
@@ -360,10 +360,10 @@ class ExampleStrategy(Node):
                 again = input("check Again?:")
                 if again == 'y' or again == 'Y':
                     print("Contiune")
-                    times=4
+                    times=3
                     break
                 else:
-                    times=3
+                    times=2
                     nest_state=States.gohome
                     return nest_state
             sause_pose[2]+=10
@@ -382,7 +382,7 @@ class ExampleStrategy(Node):
             res=self.robot_wait()
             res=self.jaw('open')
             res=self.robot_wait()
-            nest_state = States.sauselidcatch
+            nest_state = States.gohome
         elif state == States.sauselidcatch:
             self.get_logger().info('sauselidcatch')
             res=self.jaw('open')
@@ -402,10 +402,10 @@ class ExampleStrategy(Node):
                 again = input("check Again?:")
                 if again == 'y' or again == 'Y':
                     print("Contiune")
-                    times=1
+                    times=2
                     break
                 else:
-                    times=4
+                    times=1
                     nest_state=States.gohome
                     return nest_state
             sause_lid_pose[2]+=10

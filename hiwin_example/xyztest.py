@@ -41,12 +41,12 @@ cup_lid_work_pose = [262.097, 379.033, 232.367, 179.373, 0.663, 89.547]
 # cup_push_pose6 = [267.635, 390.659, 232.367, 179.373, 0.663, 89.547]
 cup_push_pose1 = [263.509, 431.921, 48.21, 179.378, 0.033, 89.551]
 cup_push_pose2 = [263.509, 431.921, 48.21, 179.336, 5.335, 89.549]
-cup_push_pose3 = [263.509, 431.921, 38.192, 179.336, 5.335, 89.549]
-cup_push_pose4 = [263.509, 423.921, 38.192, 179.368, 5.335, 89.551]
-cup_push_pose5 = [263.509, 423.921, 38.192, 179.378, 0.036, 89.551]
-cup_push_pose6 = [263.509, 423.921, 34.398, 179.378, 0.036, 89.551]
-cup_push_pose7 = [263.509, 423.921, 39.998, 179.378, 0.035, 89.551]
-cup_push_pose8 = [263.509, 423.921, 33.234, 179.378, 0.035, 89.551]
+cup_push_pose3 = [263.509, 431.921, 39.192, 179.336, 5.335, 89.549]
+cup_push_pose4 = [263.509, 422.921, 39.192, 179.368, 5.335, 89.551]
+cup_push_pose5 = [263.509, 422.921, 39.192, 179.378, -0.5, 89.551]
+cup_push_pose6 = [263.509, 422.921, 35.398, 179.378, -0.5, 89.551]
+cup_push_pose7 = [263.509, 422.921, 40.998, 179.378, -0.5, 89.551]
+cup_push_pose8 = [263.509, 422.921, 34.234, 179.378, -0.5, 89.551]
 
 sause_pose = [417.963, 177.340, 181.324, 179.372, 0.664, 89.557]
 sause_work_pose = [262.097, 379.033, 148.511, 179.378, 0.035, 89.551]
@@ -300,7 +300,7 @@ class ExampleStrategy(Node):
         elif state == States.gohome:
             self.get_logger().info('gohome')
             # res=self.move('J',home_joint,holding=False)
-            res=self.move('J',home_joint,holding=True)
+            res=self.move('J',home_joint,holding=False)
             # res=self.move('P',home_pose,holding=False)
             
             if order[order_count][0]+order[order_count][1]>0:
@@ -327,9 +327,9 @@ class ExampleStrategy(Node):
             cup_pose[2]+=30
             res=self.move('P',cup_pose,holding=False)
             cup_pose[2]-=30
-            cup_pose[2]+=20
-            res=self.move('P',cup_pose,holding=False)
-            cup_pose[2]-=20
+            # cup_pose[2]+=20
+            # res=self.move('P',cup_pose,holding=False)
+            # cup_pose[2]-=20
             cup_pose[2]+=10
             res=self.move('P',cup_pose,holding=False)
             cup_pose[2]-=10
@@ -337,42 +337,42 @@ class ExampleStrategy(Node):
             # res=self.robot_wait()
             res=self.jaw('close')
             res=self.robot_wait()
-            cup_pose[2]+=2
-            res=self.move('P',cup_pose,holding=False)
-            cup_pose[2]-=2
-            cup_pose[2]+=5
-            res=self.move('P',cup_pose,holding=False)
-            cup_pose[2]-=5
+            # cup_pose[2]+=2
+            # res=self.move('P',cup_pose,holding=False)
+            # cup_pose[2]-=2
+            # cup_pose[2]+=5
+            # res=self.move('P',cup_pose,holding=False)
+            # cup_pose[2]-=5
             cup_pose[2]+=10
             res=self.move('P',cup_pose,holding=False)
             cup_pose[2]-=10
-            cup_pose[2]+=20
-            res=self.move('P',cup_pose,holding=False)
-            cup_pose[2]-=20
+            # cup_pose[2]+=20
+            # res=self.move('P',cup_pose,holding=False)
+            # cup_pose[2]-=20
             cup_pose[2]+=30
             res=self.move('P',cup_pose,holding=False)
             cup_pose[2]-=30
-            cup_pose[2]+=40
-            res=self.move('P',cup_pose,holding=False)
-            cup_pose[2]-=40
-            cup_pose[2]+=50
-            res=self.move('P',cup_pose,holding=False)
-            cup_pose[2]-=50
+            # cup_pose[2]+=40
+            # res=self.move('P',cup_pose,holding=False)
+            # cup_pose[2]-=40
+            # cup_pose[2]+=50
+            # res=self.move('P',cup_pose,holding=False)
+            # cup_pose[2]-=50
             cup_pose[2]+=60
             res=self.move('P',cup_pose,holding=False)
             cup_pose[2]-=60
-            cup_pose[2]+=80
-            res=self.move('P',cup_pose,holding=False)
-            cup_pose[2]-=80
+            # cup_pose[2]+=80
+            # res=self.move('P',cup_pose,holding=False)
+            # cup_pose[2]-=80
             cup_pose[2]+=100
             res=self.move('P',cup_pose,holding=False)
             cup_pose[2]-=100
-            cup_pose[2]+=120
-            res=self.move('P',cup_pose,holding=False)
-            cup_pose[2]-=120
-            cup_pose[2]+=140
-            res=self.move('P',cup_pose,holding=False)
-            cup_pose[2]-=140
+            # cup_pose[2]+=120
+            # res=self.move('P',cup_pose,holding=False)
+            # cup_pose[2]-=120
+            # cup_pose[2]+=140
+            # res=self.move('P',cup_pose,holding=False)
+            # cup_pose[2]-=140
             cup_pose[2]+=160
             res=self.move('P',cup_pose,holding=False)
             cup_pose[2]-=160
@@ -400,13 +400,22 @@ class ExampleStrategy(Node):
             sause_pose[2]+=30
             res=self.move('P',sause_pose,holding=False)
             sause_pose[2]-=30
-            res=self.move('L',sause_pose)
+            sause_pose[2]+=10
+            res=self.move('P',sause_pose,holding=False)
+            sause_pose[2]-=10
+            res=self.move('P',sause_pose)
             # res=self.robot_wait()
             res=self.jaw('close')
             res=self.robot_wait()
-            sause_pose[2]+=50
-            res=self.move('L',sause_pose,holding=False)
-            sause_pose[2]-=50
+            sause_pose[2]+=10
+            res=self.move('P',sause_pose,holding=False)
+            sause_pose[2]-=10
+            sause_pose[2]+=30
+            res=self.move('P',sause_pose,holding=False)
+            sause_pose[2]-=30
+            sause_pose[2]+=70
+            res=self.move('P',sause_pose,holding=False)
+            sause_pose[2]-=70
             sause_pose[2]+=140
             res=self.move('P',sause_pose,holding=False)
             sause_pose[2]-=140
@@ -416,13 +425,16 @@ class ExampleStrategy(Node):
             sause_work_pose[2]+=110
             res=self.move('P',sause_work_pose,holding=False)
             sause_work_pose[2]-=110
-            res=self.move('L',sause_work_pose)
+            sause_work_pose[2]+=30
+            res=self.move('P',sause_work_pose,holding=False)
+            sause_work_pose[2]-=30
+            res=self.move('P',sause_work_pose)
             # res=self.robot_wait()
             res=self.jaw('open')
             res=self.robot_wait()
-            sause_work_pose[2]+=140
-            res=self.move('L',sause_work_pose,holding=True)
-            sause_work_pose[2]-=140
+            sause_work_pose[2]+=70
+            res=self.move('P',sause_work_pose,holding=True)
+            sause_work_pose[2]-=70
             # sause_work_pose[2]+=200
             # res=self.move('P',sause_work_pose,holding=False)
             # sause_work_pose[2]-=200
@@ -475,7 +487,7 @@ class ExampleStrategy(Node):
             res=self.move('L',water_pose3,holding=True)
             water_pose3[2]-=155
             water_pose3[0]-=80
-            time.sleep(0.38)
+            time.sleep(0.352)
             res=self.move('L',water_pose3,holding=False)
             nest_state = States.water_return
         elif state == States.CUP_WATER_23:
@@ -570,7 +582,6 @@ class ExampleStrategy(Node):
             # res=self.robot_wait()
             water_pose3[0]-=80
             water_pose3[2]-=155
-            time.sleep(0.25)
             res=self.move('L',water_pose3)
             # res=self.robot_wait()
             nest_state = States.water_return
@@ -670,15 +681,14 @@ class ExampleStrategy(Node):
             cup_lid_pose[2]+=30
             res=self.move('P',cup_lid_pose,holding=False)
             cup_lid_pose[2]-=30
-            cup_lid_pose[2]+=20
-            res=self.move('P',cup_lid_pose,holding=False)
-            cup_lid_pose[2]-=20
+            # cup_lid_pose[2]+=20
+            # res=self.move('P',cup_lid_pose,holding=False)
+            # cup_lid_pose[2]-=20
             cup_lid_pose[2]+=10
             res=self.move('P',cup_lid_pose,holding=False)
             cup_lid_pose[2]-=10
-
             res=self.move('P',cup_lid_pose)
-            res=self.vacuum_control(PUMP,'ON',holding=False,do_timer=24)
+            res=self.vacuum_control(PUMP,'ON',holding=False,do_timer=22)
             # if water_count>1:
             #     t = threading.Thread(target = self.fillwater)
             #     t.start()
@@ -687,8 +697,17 @@ class ExampleStrategy(Node):
             #     pass
             res=self.jaw('close')
             # res=self.robot_wait()
+            cup_lid_pose[2]+=10
+            res=self.move('P',cup_lid_pose,holding=False)
+            cup_lid_pose[2]-=10
+            cup_lid_pose[2]+=30
+            res=self.move('P',cup_lid_pose,holding=False)
+            cup_lid_pose[2]-=30
+            cup_lid_pose[2]+=50
+            res=self.move('P',cup_lid_pose,holding=False)
+            cup_lid_pose[2]-=50
             cup_lid_pose[2]+=80
-            res=self.move('L',cup_lid_pose,holding=False)
+            res=self.move('P',cup_lid_pose,holding=False)
             cup_lid_pose[2]-=80
             cup_lid_pose[2]+=160
             res=self.move('P',cup_lid_pose,holding=False)
@@ -699,7 +718,10 @@ class ExampleStrategy(Node):
             cup_lid_work_pose[2]+=30
             res=self.move('P',cup_lid_work_pose,holding=False)
             cup_lid_work_pose[2]-=30
-            res=self.move('L',cup_lid_work_pose,holding=False)
+            cup_lid_work_pose[2]+=10
+            res=self.move('P',cup_lid_work_pose,holding=False)
+            cup_lid_work_pose[2]-=10
+            res=self.move('P',cup_lid_work_pose,holding=False)
             # res=self.robot_wait()
             res=self.move('L',cup_push_pose1,holding=False,tool=8)
             res=self.move('L',cup_push_pose2,holding=False,tool=8)
@@ -713,14 +735,20 @@ class ExampleStrategy(Node):
             # res=self.robot_wait()
             res=self.jaw('close')
             res=self.robot_wait()
-            res=self.move('L',cup_push_pose7,holding=True,tool=8)
-            res=self.jaw('open')
-            res=self.robot_wait()
-            res=self.move('L',cup_push_pose8,holding=False,tool=8)
-            res=self.jaw('close')
-            res=self.robot_wait()
+            # res=self.move('L',cup_push_pose7,holding=True,tool=8)
+            # res=self.jaw('open')
+            # res=self.robot_wait()
+            # res=self.move('L',cup_push_pose8,holding=True,tool=8)
+            # res=self.jaw('close')
+            # res=self.robot_wait()
+            cup_lid_work_pose[2]+=10
+            res=self.move('P',cup_lid_work_pose,holding=False)
+            cup_lid_work_pose[2]-=10
+            cup_lid_work_pose[2]+=30
+            res=self.move('P',cup_lid_work_pose,holding=False)
+            cup_lid_work_pose[2]-=30
             cup_lid_work_pose[2]+=50
-            res=self.move('L',cup_lid_work_pose,holding=False)
+            res=self.move('P',cup_lid_work_pose,holding=False)
             cup_lid_work_pose[2]-=50
             cup_lid_work_pose[2]+=200
             res=self.move('P',cup_lid_work_pose,holding=False)
@@ -733,15 +761,23 @@ class ExampleStrategy(Node):
             sause_lid_pose[2]+=50
             res=self.move('P',sause_lid_pose,holding=False)
             sause_lid_pose[2]-=50
-            
-            res=self.move('L',sause_lid_pose)
-            res=self.vacuum_control(PUMP,'ON',holding=False,do_timer=24)
+            sause_lid_pose[2]+=30
+            res=self.move('P',sause_lid_pose,holding=False)
+            sause_lid_pose[2]-=30
+            sause_lid_pose[2]+=10
+            res=self.move('P',sause_lid_pose,holding=False)
+            sause_lid_pose[2]-=10
+            res=self.move('P',sause_lid_pose)
+            res=self.vacuum_control(PUMP,'ON',holding=False,do_timer=22)
             # res=self.robot_wait()
             # res=self.robot_wait()
             res=self.jaw('close')
             res=self.robot_wait()
+            sause_lid_pose[2]+=10
+            res=self.move('P',sause_lid_pose,holding=False)
+            sause_lid_pose[2]-=10
             sause_lid_pose[2]+=30
-            res=self.move('L',sause_lid_pose,holding=False)
+            res=self.move('P',sause_lid_pose,holding=False)
             sause_lid_pose[2]-=30
             sause_lid_pose[2]+=150
             res=self.move('P',sause_lid_pose,holding=False)
@@ -752,16 +788,30 @@ class ExampleStrategy(Node):
             sause_lid_work_pose[2]+=50
             res=self.move('P',sause_lid_work_pose,holding=False)
             sause_lid_work_pose[2]-=50
-            res=self.move('L',sause_lid_work_pose)
+            sause_lid_work_pose[2]+=30
+            res=self.move('P',sause_lid_work_pose,holding=False)
+            sause_lid_work_pose[2]-=30
+            sause_lid_work_pose[2]+=10
+            res=self.move('P',sause_lid_work_pose,holding=False)
+            sause_lid_work_pose[2]-=10
+            res=self.move('P',sause_lid_work_pose)
             # res=self.robot_wait()
             res=self.jaw('open')
+            res=self.vacuum_control(VACUUM_PIN2,'OFF',holding=False)
+            res=self.vacuum_control(VACUUM_PIN2,'ON',holding=True)
             res=self.robot_wait()
             res=self.move('L',sause_push_pose)
             # res=self.robot_wait()
             res=self.jaw('close')
             res=self.robot_wait()
+            sause_lid_work_pose[2]+=10
+            res=self.move('P',sause_lid_work_pose,holding=False)
+            sause_lid_work_pose[2]-=10
+            sause_lid_work_pose[2]+=30
+            res=self.move('P',sause_lid_work_pose,holding=False)
+            sause_lid_work_pose[2]-=30
             sause_lid_work_pose[2]+=50
-            res=self.move('L',sause_lid_work_pose,holding=False)
+            res=self.move('P',sause_lid_work_pose,holding=False)
             sause_lid_work_pose[2]-=50
             sause_lid_work_pose[2]+=150
             res=self.move('P',sause_lid_work_pose,holding=False)
