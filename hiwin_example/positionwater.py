@@ -26,10 +26,10 @@ VACUUM_PIN1 = 1
 VACUUM_PIN2 = 2
 PUMP = 3
 cup_pose = [427.14, 361.8, 210.656, 179.372, 0.664, 89.557]
-cup_work_pose = [264.386, 376.426, 202.488, 179.373, 0.668, 89.551]
+cup_work_pose = [262.097, 379.033, 182.488, 179.373, 0.668, 89.551]
 cup_work_up_pose=[356.652,189.788,105.152,179.794,0.594,90.307]
-cup_lid_pose = [52.648, 219.663, 99.106, 179.372, 0.663, 89.557]
-cup_lid_work_pose = [264.635, 376.659, 232.367, 179.373, 0.663, 89.547]
+cup_lid_pose = [50.268, 214.936, 99.106, 179.372, 0.663, 89.557]
+cup_lid_work_pose = [262.097, 379.033, 232.367, 179.373, 0.663, 89.547]
 
 #cuppushtool8
 # cup_push_pose1 = [265.791, 423.304, 51.264, 179.373, 0.668, 89.551]
@@ -38,20 +38,20 @@ cup_lid_work_pose = [264.635, 376.659, 232.367, 179.373, 0.663, 89.547]
 # cup_push_pose4 =[265.791, 423.304, 40.429, 179.368, 1.32, 89.551]
 # cup_push_pose5 = [265.791, 423.304, 40.429, 179.378, 0.023, 89.551]
 # cup_push_pose6 = [267.635, 390.659, 232.367, 179.373, 0.663, 89.547]
-cup_push_pose1 = [265.915, 429.589, 48.21, 179.378, 0.033, 89.551]
-cup_push_pose2 = [265.915, 429.589, 48.21, 179.336, 5.335, 89.549]
-cup_push_pose3 = [265.915, 429.589, 38.192, 179.336, 5.335, 89.549]
-cup_push_pose4 = [265.915, 421.589, 38.192, 179.368, 5.335, 89.551]
-cup_push_pose5 = [265.915, 421.589, 38.192, 179.378, 0.036, 89.551]
-cup_push_pose6 = [265.915, 421.589, 34.398, 179.378, 0.036, 89.551]
-cup_push_pose7 = [265.915, 421.589, 39.998, 179.378, 0.035, 89.551]
-cup_push_pose8 = [265.915, 421.589, 33.234, 179.378, 0.035, 89.551]
+cup_push_pose1 = [263.509, 431.921, 48.21, 179.378, 0.033, 89.551]
+cup_push_pose2 = [263.509, 431.921, 48.21, 179.336, 5.335, 89.549]
+cup_push_pose3 = [263.509, 431.921, 38.192, 179.336, 5.335, 89.549]
+cup_push_pose4 = [263.509, 423.921, 38.192, 179.368, 5.335, 89.551]
+cup_push_pose5 = [263.509, 423.921, 38.192, 179.378, 0.036, 89.551]
+cup_push_pose6 = [263.509, 423.921, 34.398, 179.378, 0.036, 89.551]
+cup_push_pose7 = [263.509, 423.921, 39.998, 179.378, 0.035, 89.551]
+cup_push_pose8 = [263.509, 423.921, 33.234, 179.378, 0.035, 89.551]
 
-sause_pose = [421.728, 181.31, 181.324, 179.372, 0.664, 89.557]
-sause_work_pose = [264.386, 373.426, 168.511, 179.378, 0.035, 89.551]
-sause_lid_pose = [230.97, 215.082, 115.753, 179.373, 0.666, 89.557]
-sause_lid_work_pose = [264.386, 373.426, 140.117, 179.378, 0.035, 89.551]
-sause_push_pose = [264.386, 376.426, 130.994, 179.378, 0.035, 89.551]
+sause_pose = [417.963, 177.340, 181.324, 179.372, 0.664, 89.557]
+sause_work_pose = [262.097, 379.033, 148.511, 179.378, 0.035, 89.551]
+sause_lid_pose = [227.843, 210.694, 115.753, 179.373, 0.666, 89.557]
+sause_lid_work_pose = [262.097, 379.033, 140.117, 179.378, 0.035, 89.551]
+sause_push_pose = [262.097, 379.033, 130.994, 179.378, 0.035, 89.551]
 
 home_joint = [0.00, 0.00, 0.00, 0.00, -90.00, 0.00] #joint
 home_pose = [314.951,216.448,414.945,179.794,0.594,90.307]
@@ -64,7 +64,7 @@ sause_work_up_pose=[203.557,189.788,105.152,179.794,0.594,90.307]
 # water_pose1=[263.977, 378.515, 249.824, 179.373, 0.664, 89.548]
 water_pose1=[241.689, 196.261, 272.64, 179.373, 0.664, 89.548]
 water_pose2=[43.476, 210.261, 198.852, 179.373, 0.664, 89.548]
-water_pose3 = [13.473, 281.922, 198.856, 179.374, 0.663, 89.547]
+water_pose3 = [11.788, 279.536, 198.856, 179.374, 0.663, 89.547]
 water_cup_going_pose=[356.652,189.788,105.152,-120.734,0.594,90.307]
 water_sause_going_pose=[203.557,189.788,105.152,-120.734,0.594,90.307]
 
@@ -161,10 +161,11 @@ class ExampleStrategy(Node):
             )
         res = self.call_hiwin(req)
         return res
-    def vacuum_control(self,number,OF,holding=True):
+    def vacuum_control(self,number,OF,holding=True, do_timer = 0):
         self.num=number
         self.mode=OF
         self.hold=holding
+        self.do_timer=do_timer
         if self.num==VACUUM_PIN1:
             if self.mode=='ON':
                 req = self.generate_robot_request(
@@ -212,7 +213,8 @@ class ExampleStrategy(Node):
                         cmd_mode=RobotCommand.Request.DIGITAL_OUTPUT,
                         digital_output_cmd=RobotCommand.Request.DIGITAL_ON,
                         digital_output_pin=PUMP,
-                        holding=self.hold
+                        holding=self.hold,
+                        do_timer=self.do_timer
                         # pose=pose
                     )
                     
@@ -280,9 +282,18 @@ class ExampleStrategy(Node):
                 elif again == 's' or again == 'S':
                     nest_state=States.SAUSE_WATER_1
                     return nest_state
-                else:
-                    nest_state=States.gohome
+                elif again == 'Y' or again =='y':
+                    continue
+                elif again == 'n' or again=='N':
+                    res=self.move('P',water_pose2,holding=False)
+                    res=self.move('P',water_pose1,holding=False)
+                    nest_state = States.gohome
                     return nest_state
+                elif again == 'F' or again=='f':
+                    res=self.vacuum_control(PUMP,'ON',holding=False,do_timer=24)
+                    continue
+                else:
+                    continue
         elif state == States.CUP_WATER_1:
             self.get_logger().info('CUP_WATER_1')
             water_pose3[0]+=80
@@ -290,35 +301,38 @@ class ExampleStrategy(Node):
             res=self.move('L',water_pose3,holding=True)
             water_pose3[2]-=155
             water_pose3[0]-=80
-            time.sleep(0.5)
+            time.sleep(0.38)
             res=self.move('L',water_pose3,holding=False)
             res=self.move('P',water_pose2,holding=False)
             res=self.move('P',water_pose1,holding=False)
             nest_state = States.gohome
         elif state == States.SAUSE_WATER_1:
             self.get_logger().info('SAUSE_WATER_1')
+            water_pose3[0]+=25
             water_pose3[2]+=60
             res=self.move('L',water_pose3)
             # res=self.robot_wait()
             water_pose3[2]-=60
-            water_pose3[0]+=35
+            water_pose3[0]-=25
+            water_pose3[0]+=50
             water_pose3[2]+=120
             res=self.move('L',water_pose3)
             # res=self.robot_wait()
-            water_pose3[0]-=35
+            water_pose3[0]-=50
             water_pose3[2]-=120
             water_pose3[2]+=140
-            water_pose3[0]+=50
+            water_pose3[0]+=70
             res=self.move('L',water_pose3)
             # res=self.robot_wait()
-            water_pose3[0]-=50
+            water_pose3[0]-=70
             water_pose3[2]-=140
-            water_pose3[0]+=60
+            water_pose3[0]+=80
             water_pose3[2]+=155
             res=self.move('L',water_pose3)
             # res=self.robot_wait()
-            water_pose3[0]-=60
+            water_pose3[0]-=80
             water_pose3[2]-=155
+            time.sleep(0.25)
             res=self.move('L',water_pose3)
             # res=self.robot_wait()
             res=self.move('P',water_pose2,holding=False)
@@ -362,7 +376,9 @@ class ExampleStrategy(Node):
             acceleration=DEFAULT_ACCELERATION,
             tool=1,
             base=30,
+            do_timer=0,
             digital_output_pin=0,
+            digital_input_pin=2,
             digital_output_cmd=RobotCommand.Request.DIGITAL_OFF,
             pose=Twist(),
             joints=[float('inf')]*6,
@@ -374,11 +390,14 @@ class ExampleStrategy(Node):
         request = RobotCommand.Request()
         request.digital_output_pin = digital_output_pin
         request.digital_output_cmd = digital_output_cmd
+        request.digital_input_pin = digital_input_pin
+
         request.acceleration = acceleration
         request.jog_joint = jog_joint
         request.velocity = velocity
         request.tool = tool
         request.base = base
+        request.do_timer = do_timer
         request.cmd_mode = cmd_mode
         request.cmd_type = cmd_type
         request.circ_end = circ_end
@@ -388,6 +407,7 @@ class ExampleStrategy(Node):
         request.circ_s = circ_s
         request.pose = pose
         return request
+
 
     def call_hiwin(self, req):
         while not self.hiwin_client.wait_for_service(timeout_sec=2.0):

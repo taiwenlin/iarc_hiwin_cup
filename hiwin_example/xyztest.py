@@ -26,11 +26,11 @@ VACUUM_PIN1 = 1
 VACUUM_PIN2 = 2
 PUMP = 3
 
-cup_pose = [427.14, 361.8, 210.656, 179.372, 0.664, 89.557]               #飲料杯取料點
-cup_work_pose = [264.386, 376.426, 202.488, 179.373, 0.668, 89.551]       #飲料杯工作區
-# cup_work_up_pose=[356.652,189.788,105.152,179.794,0.594,90.307]
-cup_lid_pose = [52.648, 219.663, 99.106, 179.372, 0.663, 89.557]          #飲料蓋取料點
-cup_lid_work_pose = [264.635, 376.659, 232.367, 179.373, 0.663, 89.547]   #飲料杯工作區
+cup_pose = [427.14, 361.8, 210.656, 179.372, 0.664, 89.557]
+cup_work_pose = [262.097, 379.033, 182.488, 179.373, 0.668, 89.551]
+cup_work_up_pose=[356.652,189.788,105.152,179.794,0.594,90.307]
+cup_lid_pose = [50.268, 214.936, 99.106, 179.372, 0.663, 89.557]
+cup_lid_work_pose = [262.097, 379.033, 232.367, 179.373, 0.663, 89.547]
 
 #cuppushtool8
 # cup_push_pose1 = [265.791, 423.304, 51.264, 179.373, 0.668, 89.551]
@@ -39,23 +39,23 @@ cup_lid_work_pose = [264.635, 376.659, 232.367, 179.373, 0.663, 89.547]   #飲�
 # cup_push_pose4 =[265.791, 423.304, 40.429, 179.368, 1.32, 89.551]
 # cup_push_pose5 = [265.791, 423.304, 40.429, 179.378, 0.023, 89.551]
 # cup_push_pose6 = [267.635, 390.659, 232.367, 179.373, 0.663, 89.547]
-cup_push_pose1 = [265.915, 429.589, 48.21, 179.378, 0.033, 89.551]        #壓杯蓋步驟
-cup_push_pose2 = [265.915, 429.589, 48.21, 179.336, 5.335, 89.549]
-cup_push_pose3 = [265.915, 429.589, 38.192, 179.336, 5.335, 89.549]
-cup_push_pose4 = [265.915, 421.589, 38.192, 179.368, 5.335, 89.551]
-cup_push_pose5 = [265.915, 421.589, 38.192, 179.378, 0.036, 89.551]
-cup_push_pose6 = [265.915, 421.589, 34.398, 179.378, 0.036, 89.551]
-cup_push_pose7 = [265.915, 421.589, 39.998, 179.378, 0.035, 89.551]
-cup_push_pose8 = [265.915, 421.589, 33.234, 179.378, 0.035, 89.551]
+cup_push_pose1 = [263.509, 431.921, 48.21, 179.378, 0.033, 89.551]
+cup_push_pose2 = [263.509, 431.921, 48.21, 179.336, 5.335, 89.549]
+cup_push_pose3 = [263.509, 431.921, 38.192, 179.336, 5.335, 89.549]
+cup_push_pose4 = [263.509, 423.921, 38.192, 179.368, 5.335, 89.551]
+cup_push_pose5 = [263.509, 423.921, 38.192, 179.378, 0.036, 89.551]
+cup_push_pose6 = [263.509, 423.921, 34.398, 179.378, 0.036, 89.551]
+cup_push_pose7 = [263.509, 423.921, 39.998, 179.378, 0.035, 89.551]
+cup_push_pose8 = [263.509, 423.921, 33.234, 179.378, 0.035, 89.551]
 
-sause_pose = [421.728, 181.31, 181.324, 179.372, 0.664, 89.557]           #醬料疊取料點
-sause_work_pose = [264.386, 373.426, 168.511, 179.378, 0.035, 89.551]     #醬料疊工作區
-sause_lid_pose = [230.97, 215.082, 115.753, 179.373, 0.666, 89.557]       #醬料蓋取料點
-sause_lid_work_pose = [264.386, 373.426, 140.117, 179.378, 0.035, 89.551] #醬料蓋工作區
-sause_push_pose = [264.386, 376.426, 130.994, 179.378, 0.035, 89.551]     #壓醬料蓋
+sause_pose = [417.963, 177.340, 181.324, 179.372, 0.664, 89.557]
+sause_work_pose = [262.097, 379.033, 148.511, 179.378, 0.035, 89.551]
+sause_lid_pose = [227.843, 210.694, 115.753, 179.373, 0.666, 89.557]
+sause_lid_work_pose = [262.097, 379.033, 140.117, 179.378, 0.035, 89.551]
+sause_push_pose = [262.097, 379.033, 130.994, 179.378, 0.035, 89.551]
 
-home_joint = [0.00, 0.00, 0.00, 0.00, -90.00, 0.00] #joint                #home點joint
-home_pose = [314.951,216.448,414.945,179.794,0.594,90.307]                #home點pose
+home_joint = [0.00, 0.00, 0.00, 0.00, -90.00, 0.00] #joint
+home_pose = [314.951,216.448,414.945,179.794,0.594,90.307]
 # OBJECT_POSE = [20.00, 0.00, 0.00, 0.00, -90.00, 0.00]
 OBJECT_POSE = [-67.517, 361.753, 293.500, 180.00, 0.00, 100.572] #pose
 PLACE_POSE = [-20.00, 0.00, 0.00, 0.00, -90.00, 0.00] #joint
@@ -63,14 +63,14 @@ PLACE_POSE = [-20.00, 0.00, 0.00, 0.00, -90.00, 0.00] #joint
 # water_up_pose=[277.54,199.47,178.13,180.00,0.00,90.00]
 sause_work_up_pose=[203.557,189.788,105.152,179.794,0.594,90.307]
 # water_pose1=[263.977, 378.515, 249.824, 179.373, 0.664, 89.548]
-water_pose1=[241.689, 196.261, 272.64, 179.373, 0.664, 89.548]            #倒水步驟
+water_pose1=[241.689, 196.261, 272.64, 179.373, 0.664, 89.548]
 water_pose2=[43.476, 210.261, 198.852, 179.373, 0.664, 89.548]
-water_pose3 = [13.473, 281.922, 198.856, 179.374, 0.663, 89.547]
+water_pose3 = [11.788, 279.536, 198.856, 179.374, 0.663, 89.547]
 water_cup_going_pose=[356.652,189.788,105.152,-120.734,0.594,90.307]
 water_sause_going_pose=[203.557,189.788,105.152,-120.734,0.594,90.307]
 
-cupfinish = [624.337, 316.785, 170.025, 179.373, 0.664, 89.548]           #飲料出餐區
-sausefinish = [639.569, 318.52, 112.867, 179.372, 0.662, 89.547]          #醬料出餐區
+cupfinish = [624.337, 316.785, 170.025, 179.373, 0.664, 89.548]
+sausefinish = [639.569, 318.52, 112.867, 179.372, 0.662, 89.547]
 
 cup_finish_pose_1=[595.791,-466.855,172.666,179.794,0.594,90.307]
 cup_finish_pose_2=[731.533,-466.855,172.666,179.794,0.594,90.307]
@@ -475,7 +475,7 @@ class ExampleStrategy(Node):
             res=self.move('L',water_pose3,holding=True)
             water_pose3[2]-=155
             water_pose3[0]-=80
-            time.sleep(0.5)
+            time.sleep(0.38)
             res=self.move('L',water_pose3,holding=False)
             nest_state = States.water_return
         elif state == States.CUP_WATER_23:
@@ -546,28 +546,31 @@ class ExampleStrategy(Node):
                 nest_state = None
         elif state == States.SAUSE_WATER_1:
             self.get_logger().info('SAUSE_WATER_1')
+            water_pose3[0]+=25
             water_pose3[2]+=60
             res=self.move('L',water_pose3)
             # res=self.robot_wait()
             water_pose3[2]-=60
-            water_pose3[0]+=35
+            water_pose3[0]-=25
+            water_pose3[0]+=50
             water_pose3[2]+=120
             res=self.move('L',water_pose3)
             # res=self.robot_wait()
-            water_pose3[0]-=35
+            water_pose3[0]-=50
             water_pose3[2]-=120
             water_pose3[2]+=140
-            water_pose3[0]+=50
+            water_pose3[0]+=70
             res=self.move('L',water_pose3)
             # res=self.robot_wait()
-            water_pose3[0]-=50
+            water_pose3[0]-=70
             water_pose3[2]-=140
-            water_pose3[0]+=60
+            water_pose3[0]+=80
             water_pose3[2]+=155
             res=self.move('L',water_pose3)
             # res=self.robot_wait()
-            water_pose3[0]-=60
+            water_pose3[0]-=80
             water_pose3[2]-=155
+            time.sleep(0.25)
             res=self.move('L',water_pose3)
             # res=self.robot_wait()
             nest_state = States.water_return
@@ -675,7 +678,7 @@ class ExampleStrategy(Node):
             cup_lid_pose[2]-=10
 
             res=self.move('P',cup_lid_pose)
-            res=self.vacuum_control(PUMP,'ON',holding=False,do_timer=20)
+            res=self.vacuum_control(PUMP,'ON',holding=False,do_timer=24)
             # if water_count>1:
             #     t = threading.Thread(target = self.fillwater)
             #     t.start()
@@ -732,7 +735,7 @@ class ExampleStrategy(Node):
             sause_lid_pose[2]-=50
             
             res=self.move('L',sause_lid_pose)
-            res=self.vacuum_control(PUMP,'ON',holding=False,do_timer=20)
+            res=self.vacuum_control(PUMP,'ON',holding=False,do_timer=24)
             # res=self.robot_wait()
             # res=self.robot_wait()
             res=self.jaw('close')
