@@ -30,7 +30,7 @@ cup_work_pose = [262.097, 379.033, 182.488, 179.373, 0.668, 89.551]
 cup_work_up_pose=[356.652,189.788,105.152,179.794,0.594,90.307]
 cup_lid_pose = [50.268, 214.936, 99.106, 179.372, 0.663, 89.557]
 cup_lid_work_pose = [262.097, 379.033, 232.367, 179.373, 0.663, 89.547]
-
+both_up_pose = [572.000, 170.000, 306.329, 179.372, 0.664, 89.557]
 #cuppushtool8
 # cup_push_pose1 = [265.791, 423.304, 51.264, 179.373, 0.668, 89.551]
 # cup_push_pose2 = [265.791, 423.304, 51.264, 179.336, 5.373, 89.549]
@@ -49,7 +49,7 @@ cup_push_pose8 = [263.509, 422.921, 34.234, 179.378, -0.5, 89.551]
 
 sause_pose = [417.963, 177.340, 181.324, 179.372, 0.664, 89.557]
 sause_work_pose = [262.097, 379.033, 148.511, 179.378, 0.035, 89.551]
-sause_lid_pose = [227.843, 210.694, 115.753, 179.373, 0.666, 89.557]
+sause_lid_pose = [227.843, 210.694, 108.753, 179.373, 0.666, 89.557]
 sause_lid_work_pose = [262.097, 379.033, 140.117, 179.378, 0.035, 89.551]
 sause_push_pose = [262.097, 379.033, 130.994, 179.378, 0.035, 89.551]
 
@@ -301,7 +301,7 @@ class ExampleStrategy(Node):
             res=self.move('L',water_pose3,holding=True)
             water_pose3[2]-=155
             water_pose3[0]-=80
-            time.sleep(0.352)
+            time.sleep(0.45)
             res=self.move('L',water_pose3,holding=False)
             res=self.move('P',water_pose2,holding=False)
             res=self.move('P',water_pose1,holding=False)
@@ -332,7 +332,7 @@ class ExampleStrategy(Node):
             # res=self.robot_wait()
             water_pose3[0]-=80
             water_pose3[2]-=155
-            # time.sleep(0.15)
+            time.sleep(0.2)
             res=self.move('L',water_pose3)
             # res=self.robot_wait()
             res=self.move('P',water_pose2,holding=False)

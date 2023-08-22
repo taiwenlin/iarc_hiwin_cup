@@ -31,7 +31,7 @@ cup_work_pose = [262.097, 379.033, 182.488, 179.373, 0.668, 89.551]
 cup_work_up_pose=[356.652,189.788,105.152,179.794,0.594,90.307]
 cup_lid_pose = [50.268, 214.936, 99.106, 179.372, 0.663, 89.557]
 cup_lid_work_pose = [262.097, 379.033, 232.367, 179.373, 0.663, 89.547]
-
+both_up_pose = [572.000, 170.000, 306.329, 179.372, 0.664, 89.557]
 #cuppushtool8
 # cup_push_pose1 = [265.791, 423.304, 51.264, 179.373, 0.668, 89.551]
 # cup_push_pose2 = [265.791, 423.304, 51.264, 179.336, 5.373, 89.549]
@@ -50,7 +50,7 @@ cup_push_pose8 = [263.509, 422.921, 34.234, 179.378, -0.5, 89.551]
 
 sause_pose = [417.963, 177.340, 181.324, 179.372, 0.664, 89.557]
 sause_work_pose = [262.097, 379.033, 148.511, 179.378, 0.035, 89.551]
-sause_lid_pose = [227.843, 210.694, 115.753, 179.373, 0.666, 89.557]
+sause_lid_pose = [227.843, 210.694, 108.753, 179.373, 0.666, 89.557]
 sause_lid_work_pose = [262.097, 379.033, 140.117, 179.378, 0.035, 89.551]
 sause_push_pose = [262.097, 379.033, 130.994, 179.378, 0.035, 89.551]
 
@@ -296,11 +296,12 @@ class ExampleStrategy(Node):
                 else:
                     nest_state=States.INIT
                     pass
+            res=self.move('J',home_joint,holding=False)
             nest_state = States.gohome
         elif state == States.gohome:
             self.get_logger().info('gohome')
             # res=self.move('J',home_joint,holding=False)
-            res=self.move('J',home_joint,holding=False)
+            
             # res=self.move('P',home_pose,holding=False)
             
             if order[order_count][0]+order[order_count][1]>0:
@@ -487,7 +488,7 @@ class ExampleStrategy(Node):
             res=self.move('L',water_pose3,holding=True)
             water_pose3[2]-=155
             water_pose3[0]-=80
-            time.sleep(0.352)
+            time.sleep(0.45)
             res=self.move('L',water_pose3,holding=False)
             nest_state = States.water_return
         elif state == States.CUP_WATER_23:
@@ -582,8 +583,10 @@ class ExampleStrategy(Node):
             # res=self.robot_wait()
             water_pose3[0]-=80
             water_pose3[2]-=155
+            time.sleep(0.2)
             res=self.move('L',water_pose3)
             # res=self.robot_wait()
+            
             nest_state = States.water_return
         elif state == States.SAUSE_WATER_23:
             self.get_logger().info('SAUSE_WATER_23')
@@ -654,7 +657,7 @@ class ExampleStrategy(Node):
         elif state == States.water_return:
             self.get_logger().info('water_return')
             cup_lid_pose[2]+=80
-            res=self.move('P',cup_lid_pose,holding=True)
+            res=self.move('P',cup_lid_pose,holding=False)
             cup_lid_pose[2]-=80
             # res=self.move('P',water_pose1,holding=False)
             # water_count=water_count+1
@@ -670,7 +673,7 @@ class ExampleStrategy(Node):
                 nest_state = States.SUCK_CUP_LID_TO_WORK
         elif state == States.SUCK_CUP_LID_TO_WORK:
             self.get_logger().info('SUCK_CUP_LID_TO_WORK')
-            # res=self.robot_wait()
+            res=self.robot_wait()
             res=self.jaw('open')
             # cup_lid_pose[2]+=200
             # res=self.move('P',cup_lid_pose,holding=False)
@@ -757,7 +760,7 @@ class ExampleStrategy(Node):
         elif state == States.SUCK_SAUSE_LID_TO_WORK:
             self.get_logger().info('SUCK_SAUSE_LID_TO_WORK')
             # res=self.robot_wait()
-            res=self.jaw('open')
+            # res=self.jaw('close')
             sause_lid_pose[2]+=50
             res=self.move('P',sause_lid_pose,holding=False)
             sause_lid_pose[2]-=50
@@ -771,6 +774,11 @@ class ExampleStrategy(Node):
             res=self.vacuum_control(PUMP,'ON',holding=False,do_timer=22)
             # res=self.robot_wait()
             # res=self.robot_wait()
+            res=self.vacuum_control(VACUUM_PIN1,'OFF',holding=False)
+            res=self.vacuum_control(VACUUM_PIN2,'ON',holding=False)
+            res=self.vacuum_control(VACUUM_PIN2,'OFF',holding=False)
+            # res=self.vacuum_control(VACUUM_PIN2,'ON',holding=False)
+            res=self.jaw('open')
             res=self.jaw('close')
             res=self.robot_wait()
             sause_lid_pose[2]+=10
@@ -797,8 +805,6 @@ class ExampleStrategy(Node):
             res=self.move('P',sause_lid_work_pose)
             # res=self.robot_wait()
             res=self.jaw('open')
-            res=self.vacuum_control(VACUUM_PIN2,'OFF',holding=False)
-            res=self.vacuum_control(VACUUM_PIN2,'ON',holding=True)
             res=self.robot_wait()
             res=self.move('L',sause_push_pose)
             # res=self.robot_wait()
@@ -813,134 +819,24 @@ class ExampleStrategy(Node):
             sause_lid_work_pose[2]+=50
             res=self.move('P',sause_lid_work_pose,holding=False)
             sause_lid_work_pose[2]-=50
-            sause_lid_work_pose[2]+=150
+            sause_lid_work_pose[2]+=180
             res=self.move('P',sause_lid_work_pose,holding=False)
-            sause_lid_work_pose[2]-=150
+            sause_lid_work_pose[2]-=180
             nest_state = States.SAUSE_FINISH
         elif state == States.CUP_FINISH:
             self.get_logger().info('CUP_FINISH')
-            if finish_order[order_count][1]==0:
-                if finish_order[order_count][0]==0:
-                    cupfinish[2]+=250
-                    res=self.move('P',cupfinish,holding=False)
-                    cupfinish[2]-=250
-                    res=self.move('P',cupfinish)
-                    # res=self.robot_wait()
-                    res=self.jaw('open')
-                    res=self.robot_wait()
-                    # time.sleep(0.5)
-                    cupfinish[2]+=100
-                    res=self.move('P',cupfinish,holding=False)
-                    cupfinish[2]-=100
-                    # cup_finish_pose_1[2]+=100
-                    # res=self.move('P',cup_finish_pose_1,holding=False)
-                    # cup_finish_pose_1[2]-=100
-                    # res=self.move('P',cup_finish_pose_1)
-                    # res=self.robot_wait()
-                    # res=self.jaw('open')
-                    # res=self.robot_wait()
-                    # time.sleep(0.5)
-                elif finish_order[order_count][0]==1:
-                    cupfinish[2]+=250
-                    res=self.move('P',cupfinish,holding=False)
-                    cupfinish[2]-=250
-                    res=self.move('P',cupfinish)
-                    # res=self.robot_wait()
-                    res=self.jaw('open')
-                    res=self.robot_wait()
-                    # time.sleep(0.5)
-                    cupfinish[2]+=100
-                    res=self.move('P',cupfinish,holding=False)
-                    cupfinish[2]-=100
-                    # cup_finish_pose_2[2]+=100
-                    # res=self.move('P',cup_finish_pose_2,holding=False)
-                    # cup_finish_pose_2[2]-=100
-                    # res=self.move('P',cup_finish_pose_2)
-                    # res=self.robot_wait()
-                    # res=self.jaw('open')
-                    # res=self.robot_wait()
-                    # time.sleep(0.5)
-                elif finish_order[order_count][0]==2:
-                    cupfinish[2]+=250
-                    res=self.move('P',cupfinish,holding=False)
-                    cupfinish[2]-=250
-                    res=self.move('P',cupfinish)
-                    # res=self.robot_wait()
-                    res=self.jaw('open')
-                    res=self.robot_wait()
-                    # time.sleep(0.5)
-                    cupfinish[2]+=100
-                    res=self.move('P',cupfinish,holding=False)
-                    cupfinish[2]-=100
-                    # cup_finish_pose_3[2]+=100
-                    # res=self.move('P',cup_finish_pose_3,holding=False)
-                    # cup_finish_pose_3[2]-=100
-                    # res=self.move('P',cup_finish_pose_3)
-                    # res=self.robot_wait()
-                    # res=self.jaw('open')
-                    # res=self.robot_wait()
-                    # time.sleep(0.5)
-            elif finish_order[order_count][1]==1:
-                if finish_order[order_count][0]==0:
-                    cupfinish[2]+=250
-                    res=self.move('P',cupfinish,holding=False)
-                    cupfinish[2]-=250
-                    res=self.move('P',cupfinish)
-                    # res=self.robot_wait()
-                    res=self.jaw('open')
-                    res=self.robot_wait()
-                    # time.sleep(0.5)
-                    cupfinish[2]+=100
-                    res=self.move('P',cupfinish,holding=False)
-                    cupfinish[2]-=100
-                    # cup_finish_pose_2[2]+=100
-                    # res=self.move('P',cup_finish_pose_2,holding=False)
-                    # cup_finish_pose_2[2]-=100
-                    # res=self.move('P',cup_finish_pose_2)
-                    # res=self.robot_wait()
-                    # res=self.jaw('open')
-                    # res=self.robot_wait()
-                    # time.sleep(0.5)
-                elif finish_order[order_count][0]==1:
-                    cupfinish[2]+=250
-                    res=self.move('P',cupfinish,holding=False)
-                    cupfinish[2]-=250
-                    res=self.move('P',cupfinish)
-                    # res=self.robot_wait()
-                    res=self.jaw('open')
-                    res=self.robot_wait()
-                    # time.sleep(0.5)
-                    cupfinish[2]+=100
-                    res=self.move('P',cupfinish,holding=False)
-                    cupfinish[2]-=100
-                    # cup_finish_pose_3[2]+=100
-                    # res=self.move('P',cup_finish_pose_3,holding=False)
-                    # cup_finish_pose_3[2]-=100
-                    # res=self.move('P',cup_finish_pose_3)
-                    # res=self.robot_wait()
-                    # res=self.jaw('open')
-                    # res=self.robot_wait()
-                    # time.sleep(0.5)
-            elif finish_order[order_count][1]==2:
-                cupfinish[2]+=250
-                res=self.move('P',cupfinish,holding=False)
-                cupfinish[2]-=250
-                res=self.move('P',cupfinish)
-                # res=self.robot_wait()
-                res=self.jaw('open')
-                res=self.robot_wait()
-                # time.sleep(0.5)
-                cupfinish[2]+=100
-                res=self.move('P',cupfinish,holding=False)
-                cupfinish[2]-=100
-                # cup_finish_pose_3[2]+=100
-                # res=self.move('P',cup_finish_pose_3,holding=False)
-                # cup_finish_pose_3[2]-=100
-                # res=self.move('P',cup_finish_pose_3)
-                # res=self.robot_wait()
-                # res=self.jaw('open')
-                # res=self.robot_wait()
-                # time.sleep(0.5)
+            cupfinish[2]+=250
+            res=self.move('P',cupfinish,holding=False)
+            cupfinish[2]-=250
+            res=self.move('P',cupfinish)
+            # res=self.robot_wait()
+            res=self.jaw('open')
+            res=self.robot_wait()
+            # time.sleep(0.5)
+            cupfinish[2]+=100
+            res=self.move('P',cupfinish,holding=False)
+            cupfinish[2]-=100
+            res=self.move('P',both_up_pose,holding=False)
             # cup_pose[2]-=6.1
             # cup_lid_pose[2]-=3.7
             order[order_count][0]=order[order_count][0]-1
@@ -948,69 +844,29 @@ class ExampleStrategy(Node):
             nest_state = States.gohome
         elif state == States.SAUSE_FINISH:
             self.get_logger().info('SAUSE_FINISH')
-            if finish_order[order_count][1]==0:
-                sausefinish[2]+=250
-                res=self.move('P',sausefinish,holding=False)
-                sausefinish[2]-=250
-                sausefinish[2]+=100
-                res=self.move('P',sausefinish,holding=False)
-                sausefinish[2]-=100
-                res=self.move('P',sausefinish)
-                # res=self.robot_wait()
-                res=self.jaw('open')
-                res=self.robot_wait()
-                # time.sleep(0.5)
-                sausefinish[2]+=250
-                res=self.move('P',sausefinish,holding=False)
-                sausefinish[2]-=250
-                # sause_finish_pose_1[2]+=100
-                # res=self.move('P',sause_finish_pose_1,holding=False)
-                # sause_finish_pose_1[2]-=100
-                # res=self.move('P',sause_finish_pose_1)
-                # res=self.robot_wait()
-                # res=self.jaw('open')
-                # res=self.robot_wait()
-                # time.sleep(0.5)
-            elif finish_order[order_count][1]==1:
-                sausefinish[2]+=250
-                res=self.move('P',sausefinish,holding=False)
-                sausefinish[2]-=250
-                res=self.move('P',sausefinish)
-                # res=self.robot_wait()
-                res=self.jaw('open')
-                res=self.robot_wait()
-                # time.sleep(0.5)
-                sausefinish[2]+=100
-                res=self.move('P',sausefinish,holding=False)
-                sausefinish[2]-=100
-                # sause_finish_pose_2[2]+=100
-                # res=self.move('P',sause_finish_pose_2,holding=False)
-                # sause_finish_pose_2[2]-=100
-                # res=self.move('P',sause_finish_pose_2)
-                # res=self.robot_wait()
-                # res=self.jaw('open')
-                # res=self.robot_wait()
-                # time.sleep(0.5)
-            elif finish_order[order_count][1]==2:
-                sausefinish[2]+=250
-                res=self.move('P',sausefinish,holding=False)
-                sausefinish[2]-=250
-                res=self.move('P',sausefinish)
-                # res=self.robot_wait()
-                res=self.jaw('open')
-                res=self.robot_wait()
-                # time.sleep(0.5)
-                sausefinish[2]+=100
-                res=self.move('P',sausefinish,holding=False)
-                sausefinish[2]-=100
-                # sause_finish_pose_3[2]+=100
-                # res=self.move('P',sause_finish_pose_3,holding=False)
-                # sause_finish_pose_3[2]-=100
-                # res=self.move('P',sause_finish_pose_3)
-                # res=self.robot_wait()
-                # res=self.jaw('open')
-                # res=self.robot_wait()
-                # time.sleep(0.5)
+            sausefinish[2]+=250
+            res=self.move('P',sausefinish,holding=False)
+            sausefinish[2]-=250
+            sausefinish[2]+=100
+            res=self.move('P',sausefinish,holding=False)
+            sausefinish[2]-=100
+            res=self.move('P',sausefinish)
+            # res=self.robot_wait()
+            res=self.jaw('open')
+            res=self.robot_wait()
+            # time.sleep(0.5)
+            sausefinish[2]+=250
+            res=self.move('P',sausefinish,holding=False)
+            sausefinish[2]-=250
+            res=self.move('P',both_up_pose,holding=False)
+            # sause_finish_pose_1[2]+=100
+            # res=self.move('P',sause_finish_pose_1,holding=False)
+            # sause_finish_pose_1[2]-=100
+            # res=self.move('P',sause_finish_pose_1)
+            # res=self.robot_wait()
+            # res=self.jaw('open')
+            # res=self.robot_wait()
+            # time.sleep(0.5)
             # sause_pose[2]-=8.025
             # sause_lid_pose[2]-=5.6
             order[order_count][1]=order[order_count][1]-1
@@ -1146,6 +1002,7 @@ if __name__ == "__main__":
     cup_work_up_pose[2] +=HL
     cup_lid_pose[2] +=HL
     cup_lid_work_pose[2] +=HL
+    both_up_pose[2] +=HL
     cup_push_pose1[2] +=HL
     cup_push_pose2[2] +=HL
     cup_push_pose3[2] +=HL

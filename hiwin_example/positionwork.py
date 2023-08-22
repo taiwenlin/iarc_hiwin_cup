@@ -15,7 +15,8 @@ import ordertest
 
 
 # 點餐界面
-
+zmiss=0
+HL=0
 order_count=0
 water_count=1
 DEFAULT_VELOCITY = 20
@@ -30,7 +31,7 @@ cup_work_pose = [262.097, 379.033, 182.488, 179.373, 0.668, 89.551]
 cup_work_up_pose=[356.652,189.788,105.152,179.794,0.594,90.307]
 cup_lid_pose = [50.268, 214.936, 99.106, 179.372, 0.663, 89.557]
 cup_lid_work_pose = [262.097, 379.033, 232.367, 179.373, 0.663, 89.547]
-
+both_up_pose = [572.000, 170.000, 306.329, 179.372, 0.664, 89.557]
 #cuppushtool8
 # cup_push_pose1 = [265.791, 423.304, 51.264, 179.373, 0.668, 89.551]
 # cup_push_pose2 = [265.791, 423.304, 51.264, 179.336, 5.373, 89.549]
@@ -49,7 +50,7 @@ cup_push_pose8 = [263.509, 422.921, 34.234, 179.378, -0.5, 89.551]
 
 sause_pose = [417.963, 177.340, 181.324, 179.372, 0.664, 89.557]
 sause_work_pose = [262.097, 379.033, 148.511, 179.378, 0.035, 89.551]
-sause_lid_pose = [227.843, 210.694, 115.753, 179.373, 0.666, 89.557]
+sause_lid_pose = [227.843, 210.694, 108.753, 179.373, 0.666, 89.557]
 sause_lid_work_pose = [262.097, 379.033, 140.117, 179.378, 0.035, 89.551]
 sause_push_pose = [262.097, 379.033, 130.994, 179.378, 0.035, 89.551]
 
@@ -241,6 +242,8 @@ class ExampleStrategy(Node):
         global order_count
         global water_count
         global times
+        global HL
+        global zmiss 
         if state == States.INIT:
             self.get_logger().info('INIT')
             times=1
@@ -313,17 +316,33 @@ class ExampleStrategy(Node):
                     return nest_state
             cup_work_pose[2]-=45
             res=self.move('P',cup_work_pose,holding=False)
-            cup_work_pose[2]+=45
+            
             while True:
                 again = input("check Again?:")
                 if again == 'y' or again == 'Y':
                     print("Contiune")
                     times=2
                     break
+                elif again == 'H' or again == 'h':
+                    zmiss+=0.5
+                    cup_work_pose[2]+=0.5
+                    res=self.move('P',cup_work_pose,holding=False)
+                    # cup_work_pose[2]-=0.5
+                    print(zmiss)
+                    continue
+                elif again == 'L' or again == 'l':
+                    zmiss-=0.5
+                    cup_work_pose[2]-=0.5
+                    res=self.move('P',cup_work_pose,holding=False)
+                    # cup_work_pose[2]+=0.5
+                    print(zmiss)
+                    continue
                 else:
                     times=1
                     nest_state=States.gohome
                     return nest_state
+            cup_work_pose[2]+=45
+            cup_work_pose[2]+=zmiss
             res=self.move('L',cup_work_pose,holding=False)
             res=self.robot_wait()
             res=self.jaw('open')
@@ -569,4 +588,46 @@ if __name__ == "__main__":
         cup_push_pose6[i]=cup_push_pose6[i]+cuplidworkmiss[i]
         sause_work_pose[i]=sause_work_pose[i]+sauseworkmiss[i]
         sause_lid_work_pose[i]=sause_lid_work_pose[i]+sauselidworkmiss[i]
+    cup_pose[2] +=HL
+    cup_work_pose[2] +=HL
+    cup_work_up_pose[2] +=HL
+    cup_lid_pose[2] +=HL
+    cup_lid_work_pose[2] +=HL
+    cup_push_pose1[2] +=HL
+    cup_push_pose2[2] +=HL
+    cup_push_pose3[2] +=HL
+    cup_push_pose4[2] +=HL
+    cup_push_pose5[2] +=HL
+    cup_push_pose6[2] +=HL
+    cup_push_pose7[2] +=HL
+    cup_push_pose8[2] +=HL
+    sause_pose[2] +=HL
+    sause_work_pose[2] +=HL
+    sause_lid_pose[2] +=HL
+    sause_lid_work_pose[2] +=HL
+    sause_push_pose[2] +=HL
+    home_joint = [0.00, 0.00, 0.00, 0.00, -90.00, 0.00] #joint
+    home_pose[2] +=HL
+    # OBJECT_POSE = [20.00, 0.00, 0.00, 0.00, -90.00, 0.00]
+    OBJECT_POSE = [-67.517, 361.753, 293.500, 180.00, 0.00, 100.572] #pose
+    PLACE_POSE = [-20.00, 0.00, 0.00, 0.00, -90.00, 0.00] #joint
+
+    # water_up_pose=[277.54,199.47,178.13,180.00,0.00,90.00]
+    sause_work_up_pose[2] +=HL
+    # water_pose1=[263.977, 378.515, 249.824, 179.373, 0.664, 89.548]
+    water_pose1[2] +=HL
+    water_pose2[2] +=HL
+    water_pose3[2] +=HL
+    water_cup_going_pose[2] +=HL
+    water_sause_going_pose[2] +=HL
+
+    cupfinish[2] +=HL
+    sausefinish[2] +=HL
+
+    cup_finish_pose_1[2] +=HL
+    cup_finish_pose_2[2] +=HL
+    cup_finish_pose_3[2] +=HL
+    sause_finish_pose_1[2] +=HL
+    sause_finish_pose_2[2] +=HL
+    sause_finish_pose_3[2] +=HL
     main()

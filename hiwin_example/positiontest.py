@@ -18,8 +18,8 @@ import ordertest
 
 order_count=0
 water_count=1
-DEFAULT_VELOCITY = 20
-DEFAULT_ACCELERATION =20
+DEFAULT_VELOCITY = 100
+DEFAULT_ACCELERATION =100
 LINE_VELOCITY = 100
 LINE_ACCELERATION = 100
 VACUUM_PIN1 = 1
@@ -30,7 +30,7 @@ cup_work_pose = [262.097, 379.033, 182.488, 179.373, 0.668, 89.551]
 cup_work_up_pose=[356.652,189.788,105.152,179.794,0.594,90.307]
 cup_lid_pose = [50.268, 214.936, 99.106, 179.372, 0.663, 89.557]
 cup_lid_work_pose = [262.097, 379.033, 232.367, 179.373, 0.663, 89.547]
-
+both_up_pose = [572.000, 170.000, 306.329, 179.372, 0.664, 89.557]
 #cuppushtool8
 # cup_push_pose1 = [265.791, 423.304, 51.264, 179.373, 0.668, 89.551]
 # cup_push_pose2 = [265.791, 423.304, 51.264, 179.336, 5.373, 89.549]
@@ -49,7 +49,7 @@ cup_push_pose8 = [263.509, 422.921, 34.234, 179.378, -0.5, 89.551]
 
 sause_pose = [417.963, 177.340, 181.324, 179.372, 0.664, 89.557]
 sause_work_pose = [262.097, 379.033, 148.511, 179.378, 0.035, 89.551]
-sause_lid_pose = [227.843, 210.694, 115.753, 179.373, 0.666, 89.557]
+sause_lid_pose = [227.843, 210.694, 108.753, 179.373, 0.666, 89.557]
 sause_lid_work_pose = [262.097, 379.033, 140.117, 179.378, 0.035, 89.551]
 sause_push_pose = [262.097, 379.033, 130.994, 179.378, 0.035, 89.551]
 
@@ -243,7 +243,7 @@ class ExampleStrategy(Node):
         global times
         if state == States.INIT:
             self.get_logger().info('INIT')
-            times=4
+            times=1
             # res=self.vacuum_control(VACUUM_PIN1,'ON')
             # res=self.vacuum_control(VACUUM_PIN1,'OFF')
             # res=self.vacuum_control(VACUUM_PIN2,'ON')
@@ -386,6 +386,7 @@ class ExampleStrategy(Node):
         elif state == States.sauselidcatch:
             self.get_logger().info('sauselidcatch')
             res=self.jaw('open')
+            res=self.jaw('close')
             sause_lid_pose[2]+=250
             res=self.move('P',sause_lid_pose,holding=False)
             sause_lid_pose[2]-=250
@@ -413,11 +414,15 @@ class ExampleStrategy(Node):
             sause_lid_pose[2]-=10
             res=self.move('P',sause_lid_pose)
             res=self.robot_wait()
+            res=self.jaw('open')
             res=self.robot_wait()
             res=self.jaw('close')
             res=self.robot_wait()
+            sause_lid_pose[2]+=10
+            res=self.move('P',sause_lid_pose,holding=False)
+            sause_lid_pose[2]-=10
             sause_lid_pose[2]+=30
-            res=self.move('L',sause_lid_pose,holding=False)
+            res=self.move('P',sause_lid_pose,holding=False)
             sause_lid_pose[2]-=30
             sause_lid_pose[2]+=150
             res=self.move('P',sause_lid_pose,holding=False)
@@ -528,7 +533,7 @@ def main(args=None):
     rclpy.shutdown()
 
 if __name__ == "__main__":
-    ordertest.getorder()
+    # ordertest.getorder()
     order=ordertest.order
     finish_order=ordertest.finish_order
     get_order=ordertest.get_order

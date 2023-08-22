@@ -1,0 +1,87 @@
+開啟終端機
+cd iarc_hiwin_test_ws/ubuntu_docker/22.04_ros2_cuda11_cudnn/ros2/docker
+./run.sh 
+
+進入docker
+. install/setup.bash 
+ros2 run hiwin_libmodbus hiwinlibmodbus_server 
+這行先放著
+在docker建第二個terminal
+. install/setup.bash 
+cd src/Hiwin_libmodbus/hiwin_example/hiwin_example/
+python3 home.py 
+這行先放著
+
+#open terminal---------1--------
+. install/setup.bash 
+ros2 run hiwin_libmodbus hiwinlibmodbus_server 
+
+#open terminal---------2--------
+. install/setup.bash 
+ros2 run hiwin_example three_points_calibration_example --ros-args --params-file ~/work/src/Hiwin_libmodbus/hiwin_example/config/cup_cali_pose.yaml
+
+Control + c------------1--------
+
+#open terminal---------3---------
+. install/setup.bash 
+ros2 launch hiwin_example cup_three_points_calibration.launch.py
+#goto terminal---------1---------
+ros2 run hiwin_libmodbus hiwinlibmodbus_server 
+#goto terminal---------2---------
+ros2 run hiwin_example three_points_calibration_example --ros-args --params-file ~/work/src/Hiwin_libmodbus/hiwin_example/config/cup_cali_pose.yaml
+
+enter
+
+enter
+
+enter
+
+
+162
+165
+161
+165
+161
+161
+164
+162
+161
+159
+159
+
+160 c
+164 s
+162 s
+162 s
+158 c
+160 c
+160 s
+157 c
+159 c
+160 s
+158 s
+
+s 170
+s 170
+c 164
+c 166
+c 169
+c 166
+s 168
+s 164
+s 164
+s 165
+c 163
+c 162
+
+s
+
+
+
+
+
+
+
+
+
+
