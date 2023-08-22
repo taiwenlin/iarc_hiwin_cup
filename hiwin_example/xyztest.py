@@ -15,7 +15,7 @@ import ordertest
 import threading
 
 # 點餐界面
-
+HL=0
 order_count=0
 water_count=1
 DEFAULT_VELOCITY = 100
@@ -1141,6 +1141,48 @@ if __name__ == "__main__":
         sause_work_pose[i]=sause_work_pose[i]+sauseworkmiss[i]
         sause_work_pose[i]=sause_work_pose[i]+sauseworkmiss[i]
         sause_lid_work_pose[i]=sause_lid_work_pose[i]+sauselidworkmiss[i]
+    cup_pose[2] +=HL
+    cup_work_pose[2] +=HL
+    cup_work_up_pose[2] +=HL
+    cup_lid_pose[2] +=HL
+    cup_lid_work_pose[2] +=HL
+    cup_push_pose1[2] +=HL
+    cup_push_pose2[2] +=HL
+    cup_push_pose3[2] +=HL
+    cup_push_pose4[2] +=HL
+    cup_push_pose5[2] +=HL
+    cup_push_pose6[2] +=HL
+    cup_push_pose7[2] +=HL
+    cup_push_pose8[2] +=HL
+    sause_pose[2] +=HL
+    sause_work_pose[2] +=HL
+    sause_lid_pose[2] +=HL
+    sause_lid_work_pose[2] +=HL
+    sause_push_pose[2] +=HL
+    home_joint = [0.00, 0.00, 0.00, 0.00, -90.00, 0.00] #joint
+    home_pose[2] +=HL
+    # OBJECT_POSE = [20.00, 0.00, 0.00, 0.00, -90.00, 0.00]
+    OBJECT_POSE = [-67.517, 361.753, 293.500, 180.00, 0.00, 100.572] #pose
+    PLACE_POSE = [-20.00, 0.00, 0.00, 0.00, -90.00, 0.00] #joint
+
+    # water_up_pose=[277.54,199.47,178.13,180.00,0.00,90.00]
+    sause_work_up_pose[2] +=HL
+    # water_pose1=[263.977, 378.515, 249.824, 179.373, 0.664, 89.548]
+    water_pose1[2] +=HL
+    water_pose2[2] +=HL
+    water_pose3[2] +=HL
+    water_cup_going_pose[2] +=HL
+    water_sause_going_pose[2] +=HL
+
+    cupfinish[2] +=HL
+    sausefinish[2] +=HL
+
+    cup_finish_pose_1[2] +=HL
+    cup_finish_pose_2[2] +=HL
+    cup_finish_pose_3[2] +=HL
+    sause_finish_pose_1[2] +=HL
+    sause_finish_pose_2[2] +=HL
+    sause_finish_pose_3[2] +=HL
     print(cup_pose,cup_lid_pose,sause_pose,sause_lid_pose)
     main()
     print(' ')
